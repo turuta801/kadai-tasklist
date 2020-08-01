@@ -1,16 +1,23 @@
 class TasksController < ApplicationController
   before_action :require_user_logged_in
-
+  
   def index
-    @task = Task.all
+    @tasks = current_user.tasks
+    #@tasks = current_user.tasks
+    #@task = Task.all
+    #@task = Task.find(params[:id])
   end
   
   def show
     @task = Task.find(params[:id])
+    #@user = User.find(params[:id])
+    #@task = @user.tasks.order(id: :desc).page(params[:page])
+    #counts(@user)
   end
 
   def new
-    @task = Task.new
+    @task = current_user.tasks.build 
+    #@task = Task.new
   end
 
   def create
@@ -24,7 +31,6 @@ class TasksController < ApplicationController
       flash.now[:danger] = '投稿されませんでした'
       render :new
     end
-    
   end
 
   def edit
@@ -63,4 +69,5 @@ class TasksController < ApplicationController
       redirect_to root_url
     end
   end
+  
 end
