@@ -1,5 +1,7 @@
 <%= form_with(model: @task, local: true) do |f| %>
 
+<%= render 'layouts/error_messages', model: f.object %>
+
   
 <% if task.errors.any? %>
 
